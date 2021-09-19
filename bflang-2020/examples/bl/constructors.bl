@@ -1,0 +1,15 @@
+
+struct vec2 {
+    var x:cell;
+    var y:cell;
+
+    def vec2(x_:cell, y_:cell) {
+        x = x_;
+        y = y_;
+    }
+}
+
+def main() -> cell {
+    var v0:vec2 = vec2(3, 7);
+    return v0.x + v0.y;
+}

@@ -1,0 +1,71 @@
+// This example shows the usage of type members
+// Member functions are similar to python's member functions, in that
+// they both require the user to name the 'this/self' object by themselves.
+// Different is, that the 'this/self' object does not assign changed values to
+// itself. This again has to be done by the user through returning the self object
+// and assigning it to the previous variable.
+// Also, currently it is possible to assign to the members of a type without referencing
+// the self object. This is a bug and I didn't have time to check for reference less assignment
+
+
+// This extends the standart cell type by a 'printc(self)' member function
+// from brainfuck wiki/algorithms
+fun cell.printc self {
+    __inline {
+        >>[-]>[-]>[-]>[-]>[-]>[-]>[-]>[-]>[-]<<<<<<<<<
+        [>>+>+<<<-]>>>[<<<+>>>-]<<+>[<->[>++++++++++<[->-[>+>>]>[+[-<+>]>+>>]<<<<<]>[-]
+          ++++++++[<++++++>-]>[<<+>>-]>[<<+>>-]<<]>]<[->>++++++++[<++++++>-]]<[.[-]<]<<
+    }
+}
+
+type vec2 = x, y;
+
+fun vec2.add self:vec2, that:vec2 -> new_self:vec2 {
+    new_self.x = that.x + self.x;
+    new_self.y = self.y + that.y;
+    // This is a bug:
+    // x = that.x + x;
+    // y = that.y + y;
+    // return self;
+}
+
+fun vec2.add2 self:vec2, x, y -> new_self:vec2 {
+    new_self.x = x + self.x;
+    new_self.y = self.y + y;
+}
+
+
+fun main {
+    var v:vec2, w:vec2;
+
+    print "v=(25,25)\n";
+    v.x = 25;
+    v.y = 25;
+
+    print "w=(74,74)\n";
+    w.x = 74;
+    w.y = 74;
+
+    print "v+w=(";
+    v = v.add(w);
+    v.x.printc(); // prints 99
+    print ',';
+    v.y.printc(); // prints 99
+    print ")\n";
+
+    print "v+(1,2)=(";
+    v = v.add2(1, 2);
+    v.x.printc(); // prints 100
+    print ',';
+    v.y.printc(); // prints 101
+    print ")\n";
+
+    // This is also possible
+    print "42.print()=";
+    42.printc();
+    print '\n';
+
+    // while this is not:
+    // v.printc();
+    print '\n';
+}

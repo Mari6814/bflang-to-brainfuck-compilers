@@ -1,0 +1,60 @@
+
+class Node {
+    var left:Node* = nullptr;
+    var right:Node* = nullptr;
+    var value:cell = nullptr;
+
+    fun insert(node:Node*) {
+        *insert(node->value) = node;
+    }
+
+    fun insert(value_:cell) -> Node** {
+        if (value_ <= value) {
+            if (left)
+                return left->insert(value_);
+            return &left;
+        } else {
+            if (right)
+                return right->insert(value_);
+            return &right;
+        }
+    }
+
+    fun contains(value_:cell) -> bool {
+        if (value_ == value)
+            return true;
+        if (left)
+            return left->contains(value_);
+        if (right)
+            return right->contains(value_);
+        return false;
+    }
+
+    fun inorder() {
+        if (left)
+            left->inorder();
+        __write value, '\n';
+        if (right)
+            right->inorder();
+    }
+}
+
+fun main() -> cell {
+    var tree:Node, n0:Node, n1:Node, n2:Node, n3:Node, n4:Node, n5:Node;
+    tree.value = 3;
+    n0.value = 0;
+    n1.value = 1;
+    n2.value = 2;
+    n3.value = 4;
+    n4.value = 5;
+    n5.value = 6;
+
+    tree.insert(&n1);
+    tree.insert(&n0);
+    tree.insert(&n4);
+    tree.insert(&n5);
+    tree.insert(&n2);
+    tree.insert(&n4);
+
+    tree.inorder();
+}

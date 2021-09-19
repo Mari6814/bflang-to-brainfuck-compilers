@@ -1,0 +1,7 @@
+
+def main() -> cell {
+    var target:cell;
+    target = 10;
+    __raw ">>[.->+>+<<]<<";
+    return target;
+}

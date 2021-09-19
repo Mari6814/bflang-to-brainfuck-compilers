@@ -1,0 +1,34 @@
+// Defining types, and types that use other types is easy.
+
+// Vector 2d
+type vec2 = x, y;
+
+// Rectangle with a depth component
+type aabb = min:vec2, max:vec2, depth:cell;
+
+// Makes a rectangle and gives it the depth of the argument
+fun return_rect depth -> rect:aabb {
+    var v:vec2, w:vec2;
+
+    // v = (10, 20)
+    v.x = 10;
+    v.y = 20;
+
+    // w = (20, 25)
+    w = v;
+    w.x = 20;
+    w.y = w.y + 5;
+
+    // rect = (x=10, y=20, width=10, height=5, depth=depth)
+    rect.min = v;
+    rect.max = w;
+    rect.depth = depth;
+}
+
+fun main {
+    var rect:aabb;
+    // Assignment of custom types is done cellwise
+    // there are currently no constructors and no ability to overwrite
+    // operators. But an implementation approach as python does it should be easy to do.
+    rect = return_rect(30);
+}

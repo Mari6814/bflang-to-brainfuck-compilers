@@ -1,0 +1,10 @@
+
+// comment until end of line
+def main(/* this is a comment */) -> cell {
+    return 0;
+}
+
+/*
+This
+comment terminates
+at EOF

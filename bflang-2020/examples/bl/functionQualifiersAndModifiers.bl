@@ -1,0 +1,26 @@
+
+struct vec2 {
+    var x:cell, y:cell;
+
+    // inline is an specifier and not part of the signature
+    def inline invert() -> out:vec2 {
+        out.x = -x;
+        out.y = -y;
+    }
+
+    // 'constexpr' is a qualifier that part of the signature
+    def static zero() constexpr -> out:vec2 {
+        out.x = 0;
+        out.y = 0;
+    }
+}
+
+def main() -> cell {
+    var v0:vec2 = vec2::zero();
+    var v1:vec2;
+    v1.x = 3;
+    v1.y = 8;
+
+    var v3:vec2 = v2.invert();
+    return 0;
+}

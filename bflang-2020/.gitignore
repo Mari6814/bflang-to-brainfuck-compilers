@@ -1,0 +1,6 @@
+cmake-build-*
+*.class
+*.o
+.idea
+parsers/*
+.DS_Store

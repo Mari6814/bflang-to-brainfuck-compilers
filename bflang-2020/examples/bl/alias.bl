@@ -1,0 +1,15 @@
+
+template<typename T>
+struct Matrix {
+    var data:T[4][4];
+}
+
+alias imat = Matrix<cell>;
+alias const_imat_const_ref = const imat*const;
+
+def main() -> cell {
+    var m:imat; // == Matrix<cell>
+    var ref:const_imat_const_ref = &imat;
+    m.data[1] = 5;
+    return m.data[1];
+}

@@ -1,0 +1,22 @@
+
+template<const h=4, const w=4, typename T>
+struct Matrix {
+    var data:T[w][h];
+}
+
+template<const h, typename T>
+alias vector = Matrix<h, 1, T>;
+
+template<typename T>
+alias vec2 = vector<2, T>;
+
+alias vec2i = vec2<cell>;
+
+def main() -> cell {
+    var v0:vec2i, v1:Matrix<2, 1, cell>;
+    v0.data[0][0] = 3;
+    v0.data[1][0] = 7;
+    v1 = v0;
+    return v1.data[0][0] + v1.data[1][0];
+}
+

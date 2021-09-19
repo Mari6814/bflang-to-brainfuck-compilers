@@ -1,0 +1,7 @@
+
+def main() -> cell {
+    var a:cell, b:cell, c:cell;
+    __read a, b;
+    __write (c = a * b), c;
+    return 0;
+}

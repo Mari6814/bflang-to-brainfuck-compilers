@@ -1,0 +1,22 @@
+
+class X {
+	fun X() { __write "X()",'\n'; }
+	fun ~X();
+
+	def operator~()->cell { return 0; }
+	def operator()()->cell { return 1; }
+}
+
+fun X::~X() {
+	__write "~X()", '\n';
+}
+
+fun main() -> cell {
+	{
+		var x0:X, x1:X;	
+	}
+	var x2:X;
+	~sx2; // operator~ returns 0
+	~sx2(); // operator~(operator()); returns ~1
+	return 0;
+}

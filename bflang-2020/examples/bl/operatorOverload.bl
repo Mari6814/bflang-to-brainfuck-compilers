@@ -1,0 +1,30 @@
+
+struct vec2 {
+    var x:cell;
+    var y:cell;
+
+    def operator+(this:vec2, that:vec2) -> vec2 {
+        this.x += that.x;
+        this.y += that.y;
+        return this;
+    }
+}
+
+def main() -> cell {
+    // init v0
+    var v0:vec2;
+    v0.x = 3;
+    v0.y = 4;
+
+    // init v1
+    var v1:vec2;
+    v1.x = 5;
+    v1.y = 6;
+
+    // get sum
+    var vsum:vec2;
+    vsum = v0 + v1;
+
+    // return sum of sum
+    return vsum.x + vsum.y;
+}

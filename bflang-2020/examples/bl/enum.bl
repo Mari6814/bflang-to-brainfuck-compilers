@@ -1,0 +1,25 @@
+
+enum Colors {
+    white, // white=default 0
+    red=2, // red=2
+    green, // green=3
+    blue, // blue=4
+    black=10, // black=10
+    grey // grey=11
+}
+
+/** The enum equals the following class */
+class ColorsClass {
+    static var white:cell = 100,
+               red:cell = 102,
+               green:cell = 103,
+               blue:cell = 104,
+               black:cell = 110,
+               grey:cell = 111;
+}
+
+fun main() -> cell {
+    __write Colors::white, Colors::red, Colors::green, Colors::blue, Colors::black, Colors::grey, '\n';
+    __write ColorsClass::white, ColorsClass::red, ColorsClass::green, ColorsClass::blue, ColorsClass::black, ColorsClass::grey, '\n';
+    return 0;
+}

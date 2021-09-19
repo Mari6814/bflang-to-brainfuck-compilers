@@ -1,0 +1,23 @@
+type cell
+function main (cell, cell*) -> cell
+variable cell main::a
+variable cell main::b
+variable cell* main::c
+variable cell** main::d
+
+main:
+    mov a, $0                                           ; a = $0
+    mov a, b                                            ; a = b
+    mov a, [c]                                          ; a = *c
+    mov c, $0                                           ; c = $0
+    mov c, a                                            ; c = a
+    la  c, a                                            ; c = &a
+    mov [c], $0                                         ; *c = $0
+    mov [c], a                                          ; *c = a
+    mov [d], $0                                         ; d = 0
+    la d, [c]                                           ; d = &c
+    la [d], [a]                                         ; *d = &a
+    la main::d^, [main::d - 2*main::a + 1]              ; d^ = &d[main::a].somethingAt1 with sizeof(d) == 2
+    mov [main::d^], main::a                             ; *d^ = a
+
+    ret

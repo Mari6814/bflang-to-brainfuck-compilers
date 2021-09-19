@@ -1,0 +1,26 @@
+// This showcases how printing and input works;
+
+fun main {
+    type vec2 = x,y;
+    type aabb = min:vec2, max:vec2;
+
+    var rect:aabb;
+    rect.min.x = 49;
+    rect.min.y = 50;
+    rect.max.x = 51;
+    rect.max.y = 52;
+
+    // This outputs '123412341234' because they are all equivalent output expressions
+    print "Printing recursively rect=(49,50,51,52): ", rect.min.x, rect.min.y, rect.max.x, rect.max.y, '\n';
+    print "Printing members of rect=(49,50,51,52): ", rect.min, rect.max, '\n';
+
+    // This lets the user input 4 bytes before continuing
+    print "Input 4 values for the rectangle: ";
+
+    // These are also equal expressions
+    // input rect.min.x, rect.min.y, rect.max.x, rect.max.y;
+    // input rect.min, rect.max;
+    input rect;
+    // This outputs the users 4 inputs
+    print "Printing rect=(user input) directly: ", rect;
+}

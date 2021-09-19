@@ -1,0 +1,15 @@
+type cell
+label main
+variable cell main::a
+variable cell main::b
+variable cell main::c
+
+main:
+    read main::a
+    read main::b
+    mov main::c, $0
+    sub main::a                   ; implicit label created by later @-2
+    add main::c, [main::b]
+    jnz main::a, @-2              ; relative jump -> translate to a[a-b[b-b^+c+]b^[b^-b+]]
+    write main::c
+    ret

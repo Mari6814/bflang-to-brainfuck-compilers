@@ -1,0 +1,24 @@
+
+struct X {
+    var value:cell;
+
+    def set(value:cell) {
+        this->value = value;
+    }
+
+    def get() -> cell {
+        return this->value;
+    }
+}
+
+def main() -> cell {
+    var x:X;
+    var y:X;
+
+    x.set(1);
+    y.set(x.get());
+    y.set(2);
+    x.set(y.get() + x.get());
+
+    return x.get();
+}

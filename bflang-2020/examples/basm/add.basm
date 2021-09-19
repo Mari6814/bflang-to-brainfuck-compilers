@@ -1,0 +1,11 @@
+type cell
+function main
+variable cell, main::a
+variable cell, main::b
+variable cell, main::c
+
+main:
+    read a
+    read b
+    add a, [b]
+    write a

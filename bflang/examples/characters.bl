@@ -1,0 +1,12 @@
+// This showcases characters and strings a bit
+
+fun main {
+    print "character test\n";
+    print '\b110000','\n'; // prints '0' (=48dec)
+    print 65, '\n'; // prints A
+    print '\x01' + 'A', '\n'; // prints B
+    print '\2' + '\65', '\n'; // prints C
+    print '\03' + '\065', '\n'; // prints D
+    print '\004' + '\x41', '\n'; // prints E
+    print "Tab\n\tand\n\tnewline\n\tcharacters\n\tinside\n\ta\n\tstring\n";
+}

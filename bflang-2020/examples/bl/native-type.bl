@@ -1,0 +1,11 @@
+
+/* All names are the same! */
+fun bools(bool, unsigned bool, signed bool);
+fun bytes(byte, unsigned byte, signed byte);
+fun chars(char, unsigned char, signed char);
+fun cells(cell, unsigned cell, signed cell);
+fun defaultCell(unsigned, signed);
+
+fun main() -> unsigned {
+    return 0;
+}

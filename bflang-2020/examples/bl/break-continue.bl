@@ -1,0 +1,24 @@
+
+fun main() -> cell {
+    var x:byte = 0;
+
+    do {
+        if (x >= 6)
+            break;
+        x++;
+    } while (x < 10);
+
+    __write "x=", '0' + x; // x == 6
+
+    var y:byte = 0;
+
+    while (y < 4) {
+        if (x-- > 5)
+            continue;
+        y++;
+    }
+
+    __write "y=", '0' + y, " x=", '0' + x; // y=4 x=1
+
+    return 0;
+}

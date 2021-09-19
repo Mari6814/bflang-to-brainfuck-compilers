@@ -1,0 +1,18 @@
+
+struct Static {
+    static var x:cell;
+
+    def inc() { x++; }
+}
+
+def main() -> cell {
+    var x:X[2];
+
+    x[0].inc();
+    x[1].inc();
+    x[1].inc();
+
+    __write '0'+x[0].x, '0'+x[1].x, '0'+(x[0].x == x[1].x); // writes '331'
+
+    return 0;
+}

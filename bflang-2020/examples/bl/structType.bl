@@ -1,0 +1,15 @@
+
+def main() -> cell {
+    // Array of an anonymous struct with a x and y member
+    var points:struct { var x:cell, y:cell; }[5];
+
+    // Variable with named struct type
+    var str:const struct String { var value:cell[16]; }*;
+
+    // Reusing the newly defined struct
+    var str2:String;
+
+    // Can assign the pointer;
+    str = &str2;
+    return 0;
+}

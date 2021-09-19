@@ -1,0 +1,7 @@
+
+def main() -> cell {
+    var miss1:cell, target:cell, miss2:cell;
+    __asm "mov target, $21 ; 'target' will be compiled to an address"
+          "mul target, $2  ; multiply by two to get 42 as result in target";
+    return target;
+}

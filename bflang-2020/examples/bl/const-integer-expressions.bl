@@ -1,0 +1,23 @@
+
+def main() -> cell {
+    __write 1; // 1
+    __write + 0b10; // 2
+    __write - 03; // 255 - 2
+    __write + 0x4 + 0x05; // 9
+    __write - 6 + 0x7; // 1
+    __write + 8 - 9; // 255
+    __write 0xA * 0b10; // 10*2 = 20
+    __write 11 / 3; // 3
+    __write 12 / 4; // 3
+    __write 5 / 13; // 0
+    __write 2*3 + 4/2 - 1; // 6 + 2 - 1 = 7 (precedence!)
+    __write 2 * (3+4); // 2 * 7 = 14 (brace expression)
+    __write 1 << 4; // 16 (important!)
+    __write 4 >> 1; // 2 (important!)
+    __write 0b1010 ^ 0b111; // 0b101 = 5
+    __write 0b1010 & 0b110; // 0b010 = 2
+    __write 0b1010 | 0b110; // 0b1110 = 14
+    __write 0b1010 & 0b111 | 0b11 & 0b111; // 0b10 | 0b11 = 0b11 = 3 (precedence!)
+    __write 'a' + 1; // 'b'
+
+}

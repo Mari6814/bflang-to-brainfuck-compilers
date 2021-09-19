@@ -1,0 +1,37 @@
+
+
+// A global type
+type global = member:cell;
+
+fun main {
+    // Defining our variable
+    var a:global;
+
+    // Accessing the member
+    a.member = 1;
+
+    // This outputs '1'
+    print a.member+48, '\n';
+
+    // creating a new scope
+    {
+        // Redifining the type 'global'
+        type global = member1:cell, member2:cell;
+
+        // A.member is reachable, because the type is fixed
+        a.member = 2;
+        print a.member+48, '\n';
+
+        // But we can redefine a with our local version of 'global'
+        var a:global;
+        a.member1 = 3;
+        a.member2 = 4;
+        print a.member1+48, a.member2+48, '\n';
+    }
+
+    // This is an error
+    // a.member1 = ...
+
+    // Outputs '2'
+    print a.member+48, '\n';
+}

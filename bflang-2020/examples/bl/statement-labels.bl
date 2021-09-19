@@ -1,0 +1,31 @@
+
+fun main() -> cell {
+
+    L0: while (1) {
+        do {
+            break L0;
+            __write "Reached after L0!\n";
+        } while (0);
+    }
+
+    var doonce:bool = true;
+    L1: while (1) {
+        if (!doonce) {
+            __write "The thing was done!\n";
+        }
+        do {
+            if (doonce) {
+                doonce = false;
+                continue L1;
+                __write "Reached after continue L1!\n"; // never reached
+            } else {
+                break L1;
+                __write "Reached after break L1!\n"; // never reached
+            }
+            __write "Reached end of do!\n"; // never reached
+            break;
+        } while (1);
+    }
+
+    return 0;
+}

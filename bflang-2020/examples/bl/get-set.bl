@@ -1,0 +1,44 @@
+
+interface machine {
+    def abstract const get isRunning() -> cell;
+    def abstract set isRunning(cell);
+}
+
+struct television : machine {
+    var running:cell = 0;
+
+    def override const get isRunning() -> cell { return running; }
+    def override set isRunning(s:cell) { running = s; }
+}
+
+struct microwave : machine {
+    var remainingTimeInSeconds:cell = 0;
+
+    def tickOneSecond() { --remainingTimeInSeconds; }
+    def override const get isRunning() -> cell { return remainingTimeInSeconds > 0; }
+
+    // either turns it off or sets it to one minute
+    def override set isRunning(s:cell) {
+        if (s == false)
+            remainingTimeInSeconds = 0;
+        else if (remainingTimeInSeconds == 0)
+            remainingTimeInSeconds = 60;
+    }
+}
+
+def main() -> cell {
+    var tel:television;
+    var mic:microwave;
+    var m:machine* = &mic;
+
+    tel.isRunning = true;
+
+    // before = false
+    var before:cell = m->isRunning;
+
+    // mic.isRunning = tel.isRunning
+    m->isRunning = tel.isRunning;
+
+    // return true
+    return before == false && tel.isRunning == true && mic.isRunning == true;
+}

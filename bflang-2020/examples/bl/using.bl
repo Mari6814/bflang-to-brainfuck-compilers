@@ -1,0 +1,18 @@
+
+namespace math {
+    struct vec2 {
+        var x:cell = 0, y:cell = 0;
+
+        def const dot(that:vec2) -> cell {
+            return x*that.x + y*that.y;
+        }
+    }
+}
+
+def main(void) -> cell {
+    using namespace math; // import namespace
+    var v:vec2;
+    v.x = 5;
+    v.y = 7;
+    return v.dot(v); // 5*5 + 7*7 = 25+49 = 74
+}

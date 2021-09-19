@@ -1,0 +1,67 @@
+
+template<typename T>
+struct Tree {
+    var left:Tree<T>*;
+    var right:Tree<T>*;
+    var value:T;
+
+    def Tree(value_:T) {
+        left = nullptr;
+        right = nullptr;
+        value = value_;
+    }
+
+    def insert(t:Tree<T>*) -> cell {
+        if (t->value < value) {
+            if (left != nullptr)
+                return left->insert(t);
+            left = t;
+            return true;
+        } else if (t->value > value) {
+            if (right != nullptr)
+                return right->insert(t);
+            right = t;
+            return true;
+        }
+        return false;
+    }
+
+    def contains(key:T) -> cell;
+}
+
+template<typename T>
+def Tree<T>::contains(key:T) -> cell {
+    if (key < value)
+        return left != nullptr && left->contains(key);
+    if (key > value)
+        return right != nullptr && right->contains(key);
+    return value == key;
+}
+
+template<typename T>
+def max(a:T, b:T) -> T {
+    if (a < b)
+        return b;
+    return a;
+}
+
+def main() -> cell {
+    var t0:Tree<cell> = Tree<cell>(0);
+    var t1:Tree<cell> = Tree<cell>(1);
+    var t2:Tree<cell> = Tree<cell>(2);
+    var t3:Tree<cell> = Tree<cell>(3);
+    var t4:Tree<cell> = Tree<cell>(4);
+    var t5:Tree<cell> = Tree<cell>(5);
+
+    t2.insert(&t0);
+    t2.insert(&t1);
+    t2.insert(&t4);
+    t2.insert(&t3);
+    t2.insert(&t5);
+
+    var contains1:cell = t2.contains(1) == true;
+    var contains5:cell = t2.contains(5) == true;
+    var contains6:cell = t2.contains(6) == false;
+
+    return 0;
+}

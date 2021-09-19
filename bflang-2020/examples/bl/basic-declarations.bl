@@ -1,0 +1,192 @@
+// inline class declaration in current scope (= global)
+static const GLOBAL:char = 'a'; // @global 0
+class X {
+    // member variable
+    var member:char; // @local 0
+    var member2:char; // @local 1
+
+    // static const member
+    static const CLASS_GLOBAL1:cell = 'b'; // @global 1
+    static const CLASS_GLOBAL2:char = 'c'; // @global 2
+
+    // inline constructor
+    fun X(member_:char) {
+        member = member_;
+    }
+
+    // inline destructor
+    fun ~X() { }
+
+    // inline function declaration in current scope (= ::X)
+    fun f() { }
+
+    fun g() {
+        // current scope variable declaration
+        var x:char = 'f';
+    }
+
+    // unnamed parameter name
+    fun unnamed_param(char) { }
+
+    // named parameter name
+    fun named_param(name:X) { }
+
+    // unnamed return
+    fun unnamed_return() -> X {
+        return X();
+    }
+
+    // named return variable
+    fun named_return() -> out:X {
+        out = X();
+    }
+
+    // void function and return value
+    fun void_fun(void) -> void { }
+
+    // class forward declaration in current scope
+    class Forward;
+
+    // function forward declaration
+    fun out_of_scope(cell) -> cell;
+}
+
+// out of scope function implementation
+fun X::out_of_scope(in:cell) -> cell {
+    return in;
+}
+
+// out of scope class implementation
+class X::Forward {
+    // array member
+    var member:cell[2];
+
+    // forward constructor
+    fun Forward(cell, cell);
+
+    // forward destructor
+    fun ~Forward();
+}
+
+// out of scope constructor
+fun X::Forward::Forward(a:cell, b:cell) {
+    member[0] = a;
+    member[1] = b;
+}
+
+// out of scope destructor
+fun X::Forward::~Forward() { }
+
+// function forward declaration in current scope
+fun f() -> cell;
+
+// implementation of function f
+fun f() -> cell {
+    return 42;
+}
+
+// nested forward declaration is not allowed (assuming ns:: is a namespace)
+// class ns::X;
+// fun ns::f() -> cell;
+
+// interface forward declaration
+interface Interface;
+
+// interface definition
+interface Interface {
+    // variables are not allowed
+    // var x:cell;
+
+    fun interfaceFunction() -> cell;
+}
+
+interface IOverload {
+    fun overload();
+    fun overload(char) -> char;
+}
+
+fun nested_anonymous_functions() {
+    var v:cell;
+
+    struct {
+        fun nested_anonymous_functions() {
+            var v:cell;
+        }
+    }
+
+    class {
+        fun nested_anonymous_functions() {
+            var v:cell;
+
+            struct {
+                fun nested_anonymous_functions() {
+                    var v:cell;
+                }
+            }
+
+            interface {
+                fun nested_anonymous_functions();
+            }
+        }
+    }
+}
+
+fun block_environment() {
+    var block_v:cell; // @0
+
+    {
+        var block_v:cell; // function@1 (block@0)
+        var block_w:cell; // function@2 (block@1)
+        {
+            var block_v:cell; // function@3 (block@0)
+        }
+    }
+
+    {
+        var block_v:cell; // function@1 (block@0)
+    }
+}
+
+fun control_flow_environments() {
+    var control_v:cell;
+    while (0) {
+        var control_v:cell;
+        do {
+            var control_v:cell;
+        } while (1);
+    }
+
+    if (false) {
+        var control_v:cell;
+    } else {
+        var control_v:cell;
+    }
+}
+
+
+fun no_anonymous_clash() {
+    // new anonymous struct during variable declaration
+    var i: struct {
+        var i:cell, j:cell;
+    }; // sizeof 2 @0
+
+    // no name clashes with anonymous symbols
+    var j: struct {
+        var i:cell;
+    }; // sizeof 1 @2
+
+    var k:cell; // @3
+}
+
+fun named_indeclaration_struct() {
+    // new named struct during variable declaration
+    var named_variable_struct_array: struct NamedVariableStruct {
+        var i:cell, j:cell; // sizeof 2
+    };
+    var reused_once:NamedVariableStruct; // @2
+    var reused_twice:NamedVariableStruct; // @4
+}
+
+fun main() -> cell {
+    return 0;
+}

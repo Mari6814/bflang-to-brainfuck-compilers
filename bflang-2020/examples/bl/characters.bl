@@ -1,0 +1,20 @@
+
+def print(c_str:const cell*) -> void {
+    var i:cell = 0;
+    while (c_str[i] != 0)
+        __write c_str[i++];
+}
+
+def main() -> cell {
+    var a:cell = 'a';
+    var isFive:cell = '0' + 5 == '5';
+    var r:cell = '\r';
+    var nl:cell = '\n';
+    var tab:cell = '\t';
+    var space:cell = ' ';
+    var str:cell[80] = "The next text should write 'Hello, World!' on two lines and one tab in front:";
+    var strptr:const cell*const = "Hello,\n\tWorld!";
+    __write str;
+    __write nl, tab;
+    print(strptr);
+}

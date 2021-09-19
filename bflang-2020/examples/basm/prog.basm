@@ -1,0 +1,36 @@
+type cell
+function main
+type main::byte
+variable cell main::byte::reserved
+variable cell main::byte::value
+variable cell main::i
+variable cell main::j
+variable main::byte main::k
+variable main::byte* main::kptr
+label main::_L0_
+label main::_L1_
+
+; main() {
+;   i, j = read(), read()
+;   kptr = &k
+;   kptr->value = 7
+;   k.value = 0
+;   while (i--)
+;     k.value += j
+;   print(k.value)
+; }
+
+main:
+    read main::i                                    ; i == @+0
+    read main::j                                    ; j == @+1
+    mov main::kptr, main::k                         ; kptr = &k
+    mov [main::kptr + 1], $7                        ; *(kptr).value = 7
+    mov main::k.value, $0                           ; k.value == k + $1 == @+2 + $1 == @+3
+    jnz main::i, main::_L0_, main::_L1_             ; while (i--) (jmp _L0_) else (jmp _L1_)
+main::_L0_:
+    dec main::i
+    add main::k.value, [main::j]
+    jnz main::i, main::_L0_, main::_L1_
+main::_L1_:
+    write main::k.value
+    ret

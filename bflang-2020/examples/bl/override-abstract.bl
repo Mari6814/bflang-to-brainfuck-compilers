@@ -1,0 +1,47 @@
+
+interface named {
+    def abstract const getName() -> cell[6];
+}
+
+interface shape : named {
+    def override const getName() -> cell[6] {
+        return "shape\0";
+    }
+
+    def const getArea() -> cell {
+        return 0;
+    }
+}
+
+struct circle : shape {
+    var r:cell;
+
+    def circle(r_:cell) { r = r_; }
+
+    def override const getArea() -> cell { return r * 3; }
+}
+
+struct rect : shape {
+    var w:cell, h:cell;
+
+    def rect(w_:cell, h_:cell) {
+        w = w_;
+        h = h_;
+    }
+
+    def override const getArea() -> cell { return w * h; }
+}
+
+def main() -> cell {
+    var c:circle = circle(3);
+    var r:rect = rect(2, 3);
+
+    var fruits:fruit*[2];
+    fruit[0] = &c;
+    fruit[1] = &r;
+
+    var fruit0Area:cell = fruit[0]->getArea();
+    var fruit1Area:cell = fruit[1]->getArea();
+
+    return 0;
+}

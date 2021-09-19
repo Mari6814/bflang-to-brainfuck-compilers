@@ -1,0 +1,18 @@
+
+def fib(n:cell) -> cell {
+    if (n <= 1)
+        return 1;
+    return fib(n - 1) + fib(n - 2);
+}
+
+def main() -> cell {
+    var i:cell = 0;
+    var results:cell[12];
+
+    while (i < 12) {
+        results[i] = fib(i);
+        ++i;
+    }
+
+    return 0;
+}

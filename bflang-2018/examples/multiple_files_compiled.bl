@@ -1,0 +1,14 @@
+// Compile math.bl and this file in one unit together by setting two input files at compile time
+// ./bfc -i math.bl math_main.bl -I path/to/files -v
+// Using the -v flag shows, that the compiler will indeed compile the two files together
+
+fun main {
+    print "Multiplication and division test\n";
+    // The compiler will throw an warning, that we only use the first return value of divmod
+    print "1+2*3/3==", 48+(1 + 2.mul(3).divmod(3)),'\n';
+
+    var div, mod;
+    div, mod = 17.divmod(4);
+    print "17/4=", 48+div, '\n';
+    print "17%4=", 48+mod, '\n';
+}

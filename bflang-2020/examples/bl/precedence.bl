@@ -1,0 +1,4 @@
+
+fun main() -> cell {
+    return --'a'++ + sizeof 'b' * (cell)'c' / *'e'++ - 'f';
+}

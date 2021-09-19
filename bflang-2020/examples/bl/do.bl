@@ -1,0 +1,13 @@
+
+def main() -> cell {
+    var i:cell = 5;
+    var j:cell = 7;
+    var k:cell = 0;
+
+    do {
+        k += i;
+    } while (k < j);
+
+    // k = 10
+    return k;
+}

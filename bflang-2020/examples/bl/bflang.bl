@@ -1,0 +1,6 @@
+
+/* clean file for testing */
+
+fun main() -> cell {
+
+}

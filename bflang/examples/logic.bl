@@ -1,0 +1,56 @@
+// I implemented some logical methods
+// Smaller and larger is quite difficult to implement efficiently
+// This file does not have a main method, you will have to write your own.
+
+fun cell.bool x -> cell {
+    return 0;
+    if x
+        return 1;
+}
+
+fun cell.or x, y -> cell {
+    return 0;
+    if x
+        return 1;
+
+    if y
+        return 1;
+}
+
+fun cell.and x, y -> cell {
+    return 0;
+    if x if y
+        return 1;
+}
+
+fun cell.not x -> cell {
+    return 1;
+    if x
+        return 0;
+}
+
+fun cell.xor x, y -> cell {
+    return x.not().and(y).or(x.and(y.not()));
+}
+
+fun cell.bool2 x -> cell {
+    __inline { [-]+>>[[-]<<->>]<< }
+}
+
+fun cell.or2 x, y -> cell {
+    __inline { [-]>>[[-]<<+>>]>[[-]<<<[-]>>>]<< }
+}
+
+fun cell.and2 x, y -> cell {
+    __inline { [-]>>[[-]>[[-]<<<+>>>]<]<< }
+}
+
+fun cell.not2 x -> cell {
+    __inline { [-]+>>[[-]<<->>]<< }
+}
+
+// from brainfuck wiki/algorithms
+// returns 1 if the two cells are equal
+fun cell.eq x, y -> cell {
+    __inline { [-]>>[->-<]+>[<->[-]]<[-<<+>>]<< }
+}

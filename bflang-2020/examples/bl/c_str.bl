@@ -1,0 +1,10 @@
+
+def strlen(c_str:const cell*) -> len:cell = 0 {
+    while (c_str[len] != 0)
+        ++len;
+}
+
+def main() -> cell {
+    var str:cell[16] = "Hello, World!";
+    return strlen(str);
+}

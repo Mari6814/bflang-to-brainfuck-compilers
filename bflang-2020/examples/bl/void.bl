@@ -1,0 +1,15 @@
+
+def voidptr(ptr:void * const) {
+    *ptr = 0;
+}
+
+def noparams(void) { }
+
+def noreturn(cell, cell) -> void { }
+
+// arguments are of type 'void' && should throw an error
+def noreturnbrackets(void, void) -> (void) { }
+
+def main(void) -> cell {
+    return 0;
+}

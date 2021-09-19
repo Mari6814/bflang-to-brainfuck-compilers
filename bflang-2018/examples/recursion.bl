@@ -1,0 +1,49 @@
+// This example showcases the ability of my program to compute cascade recursion
+// Sadly I was not able to implement tail recursion optimization because I didn't have time.
+
+
+// This function is not required for the test. It only prints the output of the two
+// fibonacci implementations.
+// from brainfuck wiki/algorithms
+fun cell.printc self {
+    __inline {
+        >>[-]>[-]>[-]>[-]>[-]>[-]>[-]>[-]>[-]<<<<<<<<<
+        [>>+>+<<<-]>>>[<<<+>>>-]<<+>[<->[>++++++++++<[->-[>+>>]>[+[-<+>]>+>>]<<<<<]>[-]
+          ++++++++[<++++++>-]>[<<+>>-]>[<<+>>-]<<]>]<[->>++++++++[<++++++>-]]<[.[-]<]<<
+    }
+}
+
+// sequential fibonacci
+fun fib_seq n -> out:cell {
+    var i, j;
+    i = 1; j = 0; out = 1;
+    while n {
+        n = n - 1;
+        out = i + j;
+        j = i;
+        i = out;
+    }
+}
+
+// recursive fibonacci
+fun fib_rec n -> out:cell {
+    out = 1;
+    // if n < 2
+    if n if n-1
+        return fib_rec(n - 1) + fib_rec(n - 2);
+}
+
+fun main {
+    print "fibonnaci test\n";
+    var i;
+    i = 0;
+    while i - 14 {
+        print "fib_rec("; i.printc(); print ")=";
+        fib_rec(i).printc();
+        print "\nfib_seq("; i.printc(); print ")=";
+        fib_seq(i).printc();
+        print '\n';
+        i = i + 1;
+    }
+    print "Because a cell is 8bits wide, fib(13) is not natively possible!\n";
+}

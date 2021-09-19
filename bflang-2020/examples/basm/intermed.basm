@@ -1,0 +1,56 @@
+[SYMBOLS]
+type cell
+variable heap@0, cell*
+type aabb
+type aabb::vec2
+variable aabb::vec2::x@+0, cell
+variable aabb::vec2::y@+2, cell
+variable aabb::dim@+0, aabb::vec2[2]
+function main
+function main::f (aabb, aabb::vec2[2]) -> aabb[2]
+variable main::f::out@+0, aabb[2]
+variable main::f::in1@+8, aabb
+variable main::f::in2@+12, aabb::vec2[2]
+label WL0
+label WL1
+label WL2
+variable main::i@+0, cell
+variable main::j@+1, cell
+variable main::v@+2, aabb::vec2
+variable main::w@+4, aabb::vec2
+variable main::r@+6, aabb
+
+[CODE]
+
+
+main:
+    mov main::f::out^, [main::i]
+    mul f::out^, $6
+    add f::out^, $2
+    mov f::out + [f::out^], $0
+    mov f::out, [f::in2]
+    add f::out, [f::in1], f::in2                     ; out[0] += in1; in2[0] = 0
+    add f::out + $4, [f::in1]                        ; out[1] += in1; in1 = 0
+    return
+
+main:
+    read main::i
+    mov main::j, $0xA
+    mov main::v.x, [main::i]
+    mov main::v.y, [main::j]
+    mov main::r.dim, [main::v]                       ; r.dim = v; w = 0;
+    mov main::r.dim + $2, [main::v]                  ; r.dim = v; v = 0;
+    mov @+18, [main::r]                              ; 1nd argument (in1, size 4)
+    mov @+22, [main::r.dim]                          ; 2st argument (in2, size 8)
+    call main::f, WL0                                ; build stack for 'f', jump to 'f', return to W0
+
+WL0:
+    mov @+10, [main::r.dim]                          ; pop return value into r.dim (out, size 8)
+    jmp WL1                                          ; enter while loop
+
+WL1:
+    read main::i
+    jnz [main::i], WL1, WL2                          ; if ([main::i]) jmp WL1 else WL2
+
+WL2:
+    return                                           ; exit main

@@ -1,0 +1,5 @@
+import "../examples/bl/lib.bl";
+
+def main() -> cell {
+    return lib::libfun(2); // return 4
+}

@@ -1,0 +1,24 @@
+
+constexpr var i:cell = 2 << 1;
+
+def constexpr g(j:cell) -> cell {
+    return j == i;
+}
+
+template<const j = 2*2 - 1, typename T = cell> struct Mat {
+    var data:T[i][j];
+
+    def constexpr get j() { return g(j + i) * i; }
+
+    def getJ() {
+        constexpr var h:cell = g(4);
+        return g(h);
+    }
+}
+
+def main() -> cell {
+    var m:Mat<>;
+    constexpr var x:cell = m.getJ();
+    __write g(x);
+    return 0;
+}

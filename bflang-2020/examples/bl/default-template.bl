@@ -1,0 +1,13 @@
+
+template<typename T = cell>
+struct X {
+    var value:T;
+}
+
+def main() -> cell {
+    var x0:X<>;
+    x0.value = 3;
+    var x1:X<X<> >;
+    x1.value.value = 5;
+    return x0.value + x1.value.value;
+}

@@ -1,0 +1,145 @@
+
+fun cell.eq self, that -> out:cell {
+	out = 1;
+	if (self - that)
+		out = 0;
+}
+
+type ttt = player, a00, a01, a02, a10, a11, a12, a20, a21, a22;
+
+fun init -> self:ttt {
+	self.player = 'x';
+	self.a00 = '1'; self.a01 = '2'; self.a02 = '3';
+	self.a10 = '4'; self.a11 = '5'; self.a12 = '6';
+	self.a20 = '7'; self.a21 = '8'; self.a22 = '9';
+}
+
+fun ttt.other self:ttt -> next_player:cell {
+	next_player = 'o';
+	if (self.player - 'x')
+		next_player = 'x';
+}
+
+fun ttt.Print self:ttt {
+	print self.player, "'s Turn\n",
+		  self.a00, self.a01, self.a02, '\n',
+		  self.a10, self.a11, self.a12, '\n',
+		  self.a20, self.a21, self.a22, '\n';
+}
+
+fun row a, b, c -> out:cell {
+	out = 1;
+	if (a - b)
+		out = 0;
+	if (a - c)
+		out = 0;
+}
+
+fun ttt.winner self:ttt, player:cell -> winner:cell {
+	winner = 0;
+
+	if (self.a00 - player) + (self.a01 - player) + (self.a02 - player)
+		; else winner = player;
+	if (self.a10 - player) + (self.a11 - player) + (self.a12 - player)
+		; else winner = player;
+	if (self.a20 - player) + (self.a21 - player) + (self.a22 - player)
+		; else winner = player;
+
+	if (self.a00 - player) + (self.a10 - player) + (self.a20 - player)
+		; else winner = player;
+	if (self.a01 - player) + (self.a11 - player) + (self.a21 - player)
+		; else winner = player;
+	if (self.a02 - player) + (self.a12 - player) + (self.a22 - player)
+		; else winner = player;
+
+	if (self.a00 - player) + (self.a11 - player) + (self.a22 - player)
+		; else winner = player;
+	if (self.a02 - player) + (self.a11 - player) + (self.a20 - player)
+		; else winner = player;
+}
+
+fun ttt.set self:ttt, x, y -> ttt {
+	if (x) {
+		if (x - 1) {
+			// x = 2;
+			if (y) {
+				if (y - 1) {
+					// y = 2;
+					self.a22 = self.player;
+				} else {
+					// y = 1;
+					self.a12 = self.player;
+				}
+			} else {
+				// y = 0;
+				self.a02 = self.player;
+			}
+		} else {
+			// x = 1;
+			if (y) {
+				if (y - 1) {
+					// y = 2;
+					self.a21 = self.player;
+				} else {
+					// y = 1;
+					self.a11 = self.player;
+				}
+			} else {
+				// y = 0;
+				self.a01 = self.player;
+			}
+		}
+	} else {
+		// x = 0
+		if (y) {
+			if (y - 1) {
+				// y = 2;
+				self.a20 = self.player;
+			} else {
+				// y = 1;
+				self.a10 = self.player;
+			}
+		} else {
+			// y = 0;
+			self.a00 = self.player;
+		}
+	}
+
+	self.player = self.other();
+	return self;
+}
+
+fun getInput -> x:cell, y:cell {
+	var i;
+	input i;
+	i = i - '0';
+	if i - 1 ; else return 0, 0;
+	if i - 2 ; else return 1, 0;
+	if i - 3 ; else return 2, 0;
+	if i - 4 ; else return 0, 1;
+	if i - 5 ; else return 1, 1;
+	if i - 6 ; else return 2, 1;
+	if i - 7 ; else return 0, 2;
+	if i - 8 ; else return 1, 2;
+	if i - 9 ; else return 2, 2;
+}
+
+fun main {
+	var state:ttt;
+	state = init();
+	var winner;
+	winner = 1;
+	while (winner) {
+		state.Print();
+		var x,y;
+		x, y = getInput();
+		state = state.set(x, y);
+		winner = state.winner(state.other());
+		if (winner) {
+			print "Winner=", winner, '\n';
+			winner = 0;
+		} else {
+			winner = 1;
+		}
+	}
+}

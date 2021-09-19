@@ -1,0 +1,27 @@
+type cell
+function main
+variable cell main::a
+variable cell main::b
+label main::L0
+function Fa, ()->cell               ; Fa returns one cell
+variable cell Fa::out
+function Fb, ()->cell               ; Fb returns one cell aswell
+variable cell Fb::out
+
+main:
+    read main::a                    ; user input target label address
+    call [main::a], main::L0        ; call rvalue -> dynamic function call
+                                    ; caller doesn't know either parameters nor return values
+
+main::L0:
+    pop main::b                     ; main assumes once return value of type cell
+    write main::b                   ; write 1 or 3 depending on which label was called
+    ret                             ; main assumes no return values
+
+Fa:
+    mov Fa::out, $1
+    ret
+
+Fb:
+    mov Fb::out, $3
+    ret

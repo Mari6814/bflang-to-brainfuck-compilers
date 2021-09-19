@@ -1,0 +1,17 @@
+
+struct Point {
+    var x:cell;
+    var y:cell;
+
+    def add(that:Point) -> out:Point {
+        out.x = x + that.x;
+        out.y = y + that.y;
+    }
+}
+
+def main() -> cell {
+    var p0:Point;
+    p0.x = 3;
+    p0.y = 7;
+    return p0.x + p0.y;
+}

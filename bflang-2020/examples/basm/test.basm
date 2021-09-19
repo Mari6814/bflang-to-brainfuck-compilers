@@ -1,0 +1,10 @@
+type cell
+function main -> cell
+variable cell main::a
+variable cell* main::b
+
+main:
+    mov main::a, $0
+    la main::b, [main::a]
+    mov [main::b], $1
+    ret

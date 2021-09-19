@@ -1,0 +1,7 @@
+/** this file should be imported */
+
+namespace lib {
+    def libfun(c:cell) -> cell {
+        return 2 * c;
+    }
+}

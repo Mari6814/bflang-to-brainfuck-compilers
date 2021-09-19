@@ -1,0 +1,5 @@
+
+def main() -> cell {
+    var add7:auto = [](that:cell) -> cell { return that + 7; };
+    return add7(5);
+}

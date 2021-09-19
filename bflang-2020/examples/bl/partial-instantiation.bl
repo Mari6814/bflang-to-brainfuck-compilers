@@ -1,0 +1,20 @@
+
+template<typename T>
+def f(T) {
+    __write "f(T)";
+}
+
+struct X { }
+
+def f<X>(X) {
+    __write "f(X)";
+}
+
+def main() -> cell {
+    var x:X;
+    var i:cell, j:struct Y{ };
+    f(i); // f(T)
+    f(j); // f(T)
+    f(x); // f(X)
+    return 0;
+}

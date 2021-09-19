@@ -1,0 +1,22 @@
+
+struct X {
+    def X(cell) { __write "X::X(cell)"; }
+    def X(X*) { __write "X::X(X*)"; }
+    def X() { __write "X::X()"; }
+}
+
+def f(cell) { __write "f(cell)"; }
+
+def f(X*) { __write "f(X*)"; }
+
+def main() -> cell {
+    var x0:X* = nullptr;
+    var x1:X = X(x0);
+    var x2:X = X(0);
+    var x3:X = X();
+
+    f(0);
+    f(x0);
+
+    return 0;
+}

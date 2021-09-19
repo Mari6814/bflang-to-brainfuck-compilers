@@ -1,0 +1,78 @@
+// This example shows different ways of defining functions
+
+
+// This function named 'void' has no arguments, not return values and no body
+fun void ;
+
+// This function only has a body, that outputs a message
+fun hello_world print "Hello, World!\n";
+
+// This is equivalent to the previous method
+fun hello_world2 {
+    print "Hello, World!\n";
+}
+
+// This returns a constant value
+fun const -> cell return 9;
+
+// Functions without return values make usually no sense,
+// except if you want to do IO
+fun io arg {
+    print "Your argument is ", arg, '\n';
+}
+
+// This function returns the argument+1
+fun sub1 arg -> cell
+    return arg - 1;
+
+// This returns the addition of two numbers
+fun add l, r -> cell
+    return l + r;
+
+// Same as above, but with a named return value
+fun add_named l, r -> out:cell
+    out = l + r;
+
+// Even though we only return the addition result, the subtraction result will also be correctly returned.
+// Named return values enables partial returning, which can make
+// the code more efficient. Of course, letting the compiler automatically
+// use the more efficient memory cell would be better, but I didn't have to to
+// implement this kind of optimizations.
+fun add_sub l, r -> cell, sub:cell {
+    sub = l - r;
+    return l + r;
+}
+
+fun main {
+    // does nothing
+    void();
+    // prints "Hello, World!"
+    hello_world();
+    // prints "Hello, World!"
+    hello_world2();
+    // prints "Your argument is 9"
+    // '48' is the ascii value of the character '0', which enables printing of single digit numbers
+    io(const() + 48);
+    // prints "Your argument is 8"
+    io(sub1(const()) + 48);
+
+    // prints "Your argument is 4"
+    io(sub1(5)+48);
+
+    // prints "Your argument is 9"
+    io(add(4, 5)+48);
+
+    // prints "Your argument is 6"
+    io(add_named(4, 2)+48);
+
+    var a, s;
+    a, s = add_sub(4, 1);
+    // prints "Your argument is 5/3"
+    io(a+48);
+    io(s+48);
+
+    // Using only 1 return value will use only the 1st of them
+    // and the compiler will output a warning.
+    // Outputs "Your argument is 6"
+    io(add_sub(4, 2)+48);
+}

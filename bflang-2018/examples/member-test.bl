@@ -1,0 +1,22 @@
+
+type t = c, a, b;
+
+fun t.eq self:t -> out:cell {
+	out = 1;
+	if self.a - self.b
+		out = 0;
+}
+
+fun main {
+	print "TEST TEST TEST";
+	var v:t;
+	input v.a, v.b;
+	if v.eq() {
+		var v:t;
+		print "True\n";
+	}
+	else {
+		var v:t;
+		print "False\n";
+	}
+}

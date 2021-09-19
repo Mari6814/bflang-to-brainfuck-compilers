@@ -1,0 +1,15 @@
+
+/**
+    function specifiers like 'inline' are not part of the signature
+    function qualifiers like 'constexpr' are part of the signature
+    note: of course you can't take a pointer to an inline function!
+*/
+def /*inline*/ F(i:cell) constexpr -> cell {
+    return i * 2;
+}
+
+def main() -> cell {
+    // constant pointer 'f' to a constexpr function that takes cell and returns cell.
+    var f:* const(cell) constexpr -> out:cell = F;
+    return f(2);
+}

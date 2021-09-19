@@ -1,0 +1,23 @@
+
+class Tuple {
+    var a:cell, b:cell;
+
+    def get pair() -> cell, cell {
+        return a, b;
+    }
+
+    def set pair(a_:cell, b_:cell) {
+        (a, b) = (a_, b_);
+    }
+}
+
+def main() -> cell {
+
+    var a:cell, b:cell;
+    var t:Tuple, t2:Tuple;
+    t2.pair = t.pair;
+    t.pair = (3, 7);
+    (a, b) = t.pair;
+    (a, b) = (b, a);
+    return 0;
+}
