@@ -84,7 +84,7 @@ fun main {
 }
 ```
 
-The compiler produces a corresponding Brainfuck output file [ttt.bl.b](`bflang/examples/dst/ttt.bl.b`). _You can use this output file in any Brainfuck simulator to play Tic-Tac-Toe interactively!_ E.g. you can paste ttt.b into https://copy.sh/brainfuck/, but you have to pre-insert your input at the bottom. The input `17589` (includes x and o players!) would yield the final board one turn before x wins by inserting their final mark at slot 9. It looks like I didn't program that the final board should be shown back then...
+The compiler produces a corresponding Brainfuck output file [ttt.bl.b](bflang/examples/dst/ttt.bl.b). _You can use this output file in any Brainfuck simulator to play Tic-Tac-Toe interactively!_ E.g. you can paste ttt.b into https://copy.sh/brainfuck/, but you have to pre-insert your input at the bottom. The input `17589` (includes x and o players!) would yield the final board one turn before x wins by inserting their final mark at slot 9. It looks like I didn't program that the final board should be shown back then...
 ```
 x's Turn
 x23
