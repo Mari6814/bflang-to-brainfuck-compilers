@@ -60,7 +60,7 @@ fun ttt.Print self:ttt {
 		  self.a20, self.a21, self.a22, '\n';
 }
 
-// Check the rest of the code in [ttt.bl.b](bflang/examples/dst/ttt.bl.b) for the complete implementation
+// Check the rest of the code in [ttt.bl.b](bflang/examples/ttt.bl.b) for the complete implementation
 // it has been omitted for brevity but does actually work!
 
 fun main {
@@ -84,7 +84,7 @@ fun main {
 }
 ```
 
-The compiler produces a corresponding Brainfuck output file [ttt.bl.b](bflang/examples/dst/ttt.bl.b). _You can use this output file in any Brainfuck simulator to play Tic-Tac-Toe interactively!_ E.g. you can paste ttt.b into https://copy.sh/brainfuck/, but you have to pre-insert your input at the bottom. The input `17589` (includes x and o players!) would yield the final board one turn before x wins by inserting their final mark at slot 9. It looks like I didn't program that the final board should be shown back then...
+The compiler produces a corresponding Brainfuck output file [ttt.bl.b](bflang/examples/ttt.bl.b). _You can use this output file in any Brainfuck simulator to play Tic-Tac-Toe interactively!_ E.g. you can paste ttt.b into https://copy.sh/brainfuck/, but you have to pre-insert your input at the bottom. The input `17589` (includes x and o players!) would yield the final board one turn before x wins by inserting their final mark at slot 9. It looks like I didn't program that the final board should be shown back then...
 ```
 x's Turn
 x23
@@ -114,5 +114,5 @@ These intermediate files are intended to be compiled further into Brainfuck, sim
 ## How to Use
 
 1. Explore the `bflang-2018/examples/` directories for source files and outputs.
-2. Use the output `.b` files in `bflang-2018/examples/dst/` in a Brainfuck interpreter or simulator to run the compiled programs.
+2. Use the output `.b` files in [examples](bflang/examples) or [dst](bflang/examples/dst/) in a Brainfuck interpreter or simulator to run the compiled programs.
 3. For the 2020 version, inspect the intermediate `.basm` files to see the new compilation approach, though I did not complete this attempt.
