@@ -20,7 +20,7 @@ I was very into C++ and very convinced that C++ was the best thing ever, though 
 - can define function on custom types (`fun ttt.Print self` allows `var game:ttt; ...; game.Print()`)
 - can define functions on builtin types (`fun cell.eq ...` allows `5.eq(...)`)
 - functions have to define the implicit `receiver` as first argument (`fun cell.eq self` allows `5.eq...` while `fun eq self` would only allow `eq(5...)`)
-- functions accept arguments and called by called with them (`cell.eq self, that` allow calling `5.eq(6)`)
+- functions accept arguments and can be called when providing them (`cell.eq self, that` allow calling `5.eq(6)`)
 - you have named return values (`-> out:cell` = `-> out`)
 - you can define multipe return types (`-> value1:type1, value2:type2`)
 - you can optionally `return` to set the output without naming it (`fun f -> out { return 5; }` is the same as `fun f -> out { out = 5; }`)
