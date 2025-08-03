@@ -12,9 +12,24 @@ I was very into C++ and very convinced that C++ was the best thing ever, though 
 - **bflang-2018/**: A historical copy of `bflang`, kept for legacy reasons. Both directories are essentially the same.
 - **bflang-2020/**: A new attempt started in 2020, after my year at the University of Tokyo and reading the Dragon Book. This version introduces a more sophisticated compiler pipeline, including intermediate representations and ANTLR grammars.
 
+### Language features
+
+- default type of identifiers is the built-in `cell` (`type ttt = player, a00, ...`, where `player` and `a00` become `player:cell` and `a00:cell`)
+- `cell`s are just unsigned bytes (because this is brainfuck)
+- has newtypes (`type ttt =`) that, when used, tell the compile to allocate the expected amount on the stack
+- can define function on custom types (`fun ttt.Print self` allows `var game:ttt; ...; game.Print()`)
+- can define functions on builtin types (`fun cell.eq ...` allows `5.eq(...)`)
+- functions have to define the implicit `receiver` as first argument (`fun cell.eq self` allows `5.eq...` while `fun eq self` would only allow `eq(5...)`)
+- functions accept arguments and called by called with them (`cell.eq self, that` allow calling `5.eq(6)`)
+- you have named return values (`-> out:cell` = `-> out`)
+- you can define multipe return types (`-> value1:type1, value2:type2`)
+- you can optionally `return` to set the output without naming it (`fun f -> out { return 5; }` is the same as `fun f -> out { out = 5; }`)
+- the underlying brainfuck bytecode implements a stack that does support recursion! See [recursion.bl](bflang/examples/recursion.bl) and its output [recursion.b](bflang/examples/dst/recursion.b).
+- and many more features...
+
 ## Example: bflang (2014-2018)
 
-Below is an excerpt from the source file `examples/ttt.bl`, which implements a playable Tic-Tac-Toe game in the custom high-level language:
+Below is an excerpt from the source file [ttt.bl](bflang/examples/ttt.bl), which implements a playable Tic-Tac-Toe game in the custom high-level language.
 
 ```bl
 fun cell.eq self, that -> out:cell {
@@ -45,7 +60,7 @@ fun ttt.Print self:ttt {
 		  self.a20, self.a21, self.a22, '\n';
 }
 
-// Check the rest of the code in `examples/ttt.bl` for the complete implementation
+// Check the rest of the code in [ttt.bl.b](bflang/examples/dst/ttt.bl.b) for the complete implementation
 // it has been omitted for brevity but does actually work!
 
 fun main {
@@ -69,19 +84,26 @@ fun main {
 }
 ```
 
-The compiler produces a corresponding Brainfuck output file (`examples/dst/ttt.bl.b`). _You can use this output file in any Brainfuck simulator to play Tic-Tac-Toe interactively!_
+The compiler produces a corresponding Brainfuck output file [ttt.bl.b](`bflang/examples/dst/ttt.bl.b`). _You can use this output file in any Brainfuck simulator to play Tic-Tac-Toe interactively!_ E.g. you can paste ttt.b into https://copy.sh/brainfuck/, but you have to pre-insert your input at the bottom. The input `17589` (includes x and o players!) would yield the final board one turn before x wins by inserting their final mark at slot 9. It looks like I didn't program that the final board should be shown back then...
+```
+x's Turn
+x23
+4x6
+oo9
+Winner=x
+```
 
 ## Example: bflang-2020 (2020)
 
 After reading the Dragon Book, I started a new project with a more advanced architecture. The new pipeline uses ANTLR grammars (`grammars/BrainfuckLang.g4` and `grammars/BrainfuckLangAssembly.g4`) to parse the source language and generate intermediate files (`examples/basm/`).
 
-Here is an example of a source file from `examples/bl/alias.bl`:
+Here is an example of a source file from [alias.bl](bflang-2020/examples/bl/alias.bl):
 
 ```bflang
 ???
 ```
 
-The compiler then generates an intermediate representation, for example, `examples/basm/relativeJump.basm`:
+The compiler then generates an intermediate representation, for example, [relativeJump.basm](bflang-2020/examples/basm/relativeJump.basm):
 
 ```basm
 ???
